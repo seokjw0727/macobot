@@ -8,7 +8,7 @@ intents = discord.Intents.default()
 intents.members = True
 intents.presences = True
 intents.message_content = True
-bot = commands.Bot(command_prefix='!', intents=intents)
+bot = commands.Bot(command_prefix='매코야', intents=intents)
 @bot.event
 async def on_ready():
     os.system('cls')
@@ -48,13 +48,6 @@ async def 청소(ctx, amount: int):
         await ctx.send(embed=embed)
 
 
-
-        
-
-@bot.command() # 유저가 정의되지 않은 명령어를 입력하면, embed를 보냅니다.
-async def error(ctx):
-    embed = discord.Embed(title='명령어 오류', description='정의되지 않은 명령어입니다.', color=0xff0000)
-    await ctx.send(embed=embed)
 
 
 
