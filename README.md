@@ -1,0 +1,1 @@
+private repository 에서 개발중인 봇에 추가될 기능을 테스트하는 봇입니다.
