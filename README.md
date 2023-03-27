@@ -13,10 +13,11 @@ IDE: <a href="https://code.visualstudio.com/"><img src="https://img.shields.io/b
 ### 구현중인 기능
 
 > **서버 관리**
->> 채팅 청소 <br>
+>> 채팅 청소 <br>d
 >> 밴<br>
 >> 킥<br>
 >> 뮤트<Br>
+>> 공지<br>
 
 > **유저 관리**
 >> 랭킹 (경험치, 레벨)<br>
