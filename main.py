@@ -1,4 +1,5 @@
 import asyncio
+import json
 import discord
 import os
 from discord.ext import commands
@@ -8,7 +9,7 @@ intents = discord.Intents.default()
 intents.members = True
 intents.presences = True
 intents.message_content = True
-bot = commands.Bot(command_prefix='매코야', intents=intents)
+bot = commands.Bot(command_prefix='매코야 ', intents=intents)
 @bot.event
 async def on_ready():
     os.system('cls')
@@ -49,10 +50,22 @@ async def 청소(ctx, amount: int):
 
 
 
+# bot.command() # '공지' 라고 하면, 봇이 멘션하는 사람에게 embed를 보냅니다.
+# async def 공지(ctx, user: discord.Member, *, content):
+#     embed = discord.Embed(title='공지', description=f'{content}', color=0x00ff00)
+#     await user.send(embed=embed)
+#     embed = discord.Embed(title='공지 완료', description=f'{user}님에게 공지를 보냈습니다.', color=0x00ff00)
+
+@bot.command()
+async def 뎀(ctx, content):
+    user = ctx.message.mentions[0]
+    embed = discord.Embed(title="매코가 말했어요!", description=content, color=0x00ff00)
+    await user.send(embed=embed)
 
 
 
 
+        
 
 
 
