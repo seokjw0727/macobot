@@ -1,6 +1,7 @@
 import asyncio
 import json
 import discord
+import  random
 import os
 from discord.ext import commands
 from dotenv import load_dotenv
@@ -9,7 +10,7 @@ intents = discord.Intents.default()
 intents.members = True
 intents.presences = True
 intents.message_content = True
-bot = commands.Bot(command_prefix='매코야 ', intents=intents)
+bot = commands.Bot(command_prefix='매코 ', intents=intents)
 @bot.event
 async def on_ready():
     os.system('cls')
@@ -52,9 +53,10 @@ async def 청소(ctx, amount: int):
 
 @bot.event # '매코야' 라는 메시지를 감지하면, 봇이 '왜여?' 라고 답장합니다.
 async def on_message(message):
-    if message.content == '매코야':
-        await message.channel.send('왜여?')
-    await bot.process_commands(message)
+    if message.content.startswith('매코야'):
+        replies = ['왜 불러여?', '매코!', '왜여?', '온라인!']
+        reply = random.choice(replies)
+        await message.channel.send(reply)
     
 
 
