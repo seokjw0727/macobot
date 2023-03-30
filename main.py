@@ -59,7 +59,22 @@ async def on_message(message):
         reply = random.choice(replies)
         await message.channel.send(reply)
     elif message.content.startswith(bot.command_prefix):
-        await bot.process_commands(message)     
+        await bot.process_commands(message)
+
+
+@bot.command() # '경고' 라고 하면, 봇이 경고를 주는 함수를 실행합니다.
+async def 경고(ctx, member: discord.Member, *, reason=None):
+    channel = bot.get_channel(1091003605240266875)
+    if channel is None:
+        await ctx.send('경고 채널을 찾을 수 없습니다.')
+        return
+    
+    warning_message = f"__{member}__ 님이 관리자에게 경고를 받았습니다.\n> 사유: {reason}"
+    await channel.send(warning_message)
+
+    # 경고를 준 메시지를 삭제합니다.
+    await ctx.message.delete()
+    
 
 
 
