@@ -79,22 +79,6 @@ async def 경고(ctx, member: discord.Member, *, reason=None):
 
 
 
-@bot.command() # 임시로 추가한 openai 가 만들어준 코드, 수정 예정
-async def stock(ctx, symbol):
-    api_key = 'YOUR_API_KEY'
-    api_url = f'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={symbol}&apikey={api_key}'
-    
-    response = requests.get(api_url)
-    data = response.json()
-    
-    if 'Global Quote' in data:
-        symbol_data = data['Global Quote']
-        message = f"Stock data for {symbol}:\nPrice: {symbol_data['05. price']}\nChange: {symbol_data['09. change']} ({symbol_data['10. change percent']})"
-    else:
-        message = f"Sorry, could not retrieve stock data for {symbol}."
-    
-    await ctx.send(message)
-
 
         
 
