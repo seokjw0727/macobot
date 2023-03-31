@@ -18,6 +18,9 @@ bot = commands.Bot(command_prefix='매코 ', intents=intents)
 
 @bot.event
 async def on_ready():
+    await bot.change_presence(activity=discord.Game(name='디버그'))
+#   activity = discord.Activity(name='my activity', type=discord.ActivityType.watching)
+#   await client.change_presence(activity=activity)
     os.system('cls')
     if bot.latency * 1000 >= 200:
         print(f'{bot.user} is ready!')
@@ -27,6 +30,8 @@ async def on_ready():
         print(f'{bot.user} is ready!')
         print(f'{bot.latency * 1000}ms')       
 
+
+                             
 
 
 @bot.command() # '상태' 라고 하면, 봇의 핑을 embed로 보여줍니다.
