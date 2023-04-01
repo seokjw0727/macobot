@@ -12,15 +12,13 @@ intents = discord.Intents.default()
 intents.members = True
 intents.presences = True
 intents.message_content = True
-bot = commands.Bot(command_prefix='매코 ', intents=intents)
+bot = commands.Bot(command_prefix='매코 ', intents=intents) # 호출 명령어를 '매코 ' 로 설정함.
 
 
 
-@bot.event
+@bot.event # 봇이 준비되면, 봇의 상태를 '개발'으로 바꾸고, 봇의 핑을 출력함.
 async def on_ready():
-    await bot.change_presence(activity=discord.Game(name='디버그'))
-#   activity = discord.Activity(name='my activity', type=discord.ActivityType.watching)
-#   await client.change_presence(activity=activity)
+    await bot.change_presence(activity=discord.Game(name='개발'))
     os.system('cls')
     if bot.latency * 1000 >= 200:
         print(f'{bot.user} is ready!')
@@ -31,10 +29,8 @@ async def on_ready():
         print(f'{bot.latency * 1000}ms')       
 
 
-                             
 
-
-@bot.command() # '상태' 라고 하면, 봇의 핑을 embed로 보여줍니다.
+@bot.command() # '상태' 명령어, 봇의 상태를 embed로 보여줌.
 async def 상태(ctx):
     # 만약 봇의 핑이 200 이상이라면 embed의 색을 빨강색으로 합니다.
     if bot.latency * 1000 >= 200:
@@ -47,7 +43,7 @@ async def 상태(ctx):
 
 
 
-@bot.command() # '청소' 라고 하면, 봇이 메시지를 입력하는 자연수만큼 삭제하고, 삭제한 메시지의 수를 embed로 보여줍니다.
+@bot.command() # '청소' 명령어, 메시지를 청소함.
 async def 청소(ctx, amount: int):
     if amount <= 0 or amount is None:
         embed = discord.Embed(title='오류', description='1 이상의 자연수를 입력해주세요.', color=0xff0000)
@@ -59,7 +55,7 @@ async def 청소(ctx, amount: int):
 
         
 
-@bot.event # '매코야' 라는 메시지를 감지하면, 봇이 '왜여?' 라고 답장합니다.
+@bot.event # '매코야' 라는 메시지를 감지하면, 랜덤으로 메시지를 보냄.
 async def on_message(message):
     if message.content == '매코야':
         replies = ['왜 불러여?', '매코!', '왜여?', '온라인!']
@@ -69,7 +65,8 @@ async def on_message(message):
         await bot.process_commands(message)
 
 
-@bot.command() # '경고' 라고 하면, 봇이 경고를 주는 함수를 실행합니다.
+
+@bot.command() # '경고' 명령어, 유저에게 경고를 줌. (추가 기능 필요)
 async def 경고(ctx, member: discord.Member, *, reason=None):
     channel = bot.get_channel(1091003605240266875)
     if channel is None:
