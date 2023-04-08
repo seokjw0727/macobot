@@ -76,11 +76,17 @@ async def 경고(ctx, member: discord.Member, *, reason=None):
     warning_message = f"__{member}__ 님이 관리자에게 경고를 받았습니다.\n> 사유: {reason}"
     await channel.send(warning_message)
 
-    # 경고를 준 메시지를 삭제합니다.
-    await ctx.message.delete()
 
 
+@bot.command() # '공지' 명령어, 특정 채널에 공지 embed를 전송함.
+async def 공지(ctx, *, content):
+    channel = bot.get_channel(1094255511609802792)
+    if channel is None:
+        await ctx.send('공지 채널을 찾을 수 없습니다.')
+        return
 
+    embed=discord.Embed(title="공지", description='>' + content + ' ||@everyone||', color=0x00ff00)
+    await channel.send(embed=embed)
 
         
 
