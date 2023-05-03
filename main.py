@@ -19,7 +19,7 @@ bot.remove_command('help') # 기본 help 명령어를 제거함.
 async def on_ready():
     await bot.change_presence(activity=discord.Game(name='개발'))
     os.system('cls')
-    if bot.latency * 1000 >= 200:
+    if bot.latency * 1000 >= 210:
         print(f'{bot.user} is ready!')
         print(f'{bot.latency * 1000}ms')
         print('Ping is too high!')
@@ -71,30 +71,30 @@ async def status_error(ctx, error):
 
 @bot.tree.command(name="청소") # '청소' 명령어
 @commands.has_permissions(administrator=True)
-@app_commands.describe(개수="청소할 메시지의 개수")
+@app_commands.describe(amount="청소할 메시지의 개수")
 async def clear_chat(interaction: discord.Interaction, amount: int):
     if amount <= 0 or amount is None:
         embed = discord.Embed(title='오류', description='1 이상의 자연수를 입력해주세요.', color=0xff0000)
-        await interaction.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
     else:
         await interaction.channel.purge(limit=amount)
         embed = discord.Embed(title='청소 완료', description=f'{amount}개의 메시지를 삭제했습니다.', color=0x00ff00)
-        await interaction.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
 
 @clear_chat.error
-async def clear_chat_error(ctx, error):
+async def clear_chat_error(interaction: discord.Interaction, error):
     if isinstance(error, commands.MissingPermissions):
         embed = discord.Embed(title='거부', description='당신은 관리자 권한이 없습니다.', color=0xff0000)
-        await ctx.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
     elif isinstance(error, commands.MissingRequiredArgument):
         embed = discord.Embed(title='오류', description='청소할 메시지의 개수를 입력해주세요.', color=0xff0000)
-        await ctx.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
     elif isinstance(error, commands.BadArgument):
         embed = discord.Embed(title='오류', description='1 이상의 자연수를 입력해주세요.', color=0xff0000)
-        await ctx.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
     else:
         embed = discord.Embed(title='오류', description='알 수 없는 오류가 발생했습니다.', color=0xff0000)
-        await ctx.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
 
 
 
@@ -104,24 +104,24 @@ async def clear_chat_error(ctx, error):
 async def warn(interaction: discord.Interaction, 유저: discord.Member, 사유: str):
     channel = bot.get_channel(1091003605240266875)
     if channel is None:
-        await interaction.send('경고 채널을 찾을 수 없습니다.')
+        await interaction.response.send_message('경고 채널을 찾을 수 없습니다.')
         return
     warning_message = f"__{유저}__ 님이 관리자에게 경고를 받았습니다.\n> 사유: {사유}"
     await channel.send(warning_message)
     embed = discord.Embed(title='성공', description=f'{유저} 님에게 경고를 부여했습니다.', color=0x00ff00)
-    await interaction.send(embed=embed)
+    await interaction.response.send_message(embed=embed)
 
 @warn.error
-async def warn_error(ctx, error):
+async def warn_error(interaction: discord.Interaction, error):
     if isinstance(error, commands.MissingPermissions):
         embed = discord.Embed(title='오류', description='당신은 관리자 권한이 없습니다.', color=0xff0000)
-        await ctx.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
     elif isinstance(error, commands.MissingRequiredArgument):
         embed = discord.Embed(title='오류', description='경고를 줄 유저와 경고 사유를 입력해주세요.', color=0xff0000)
-        await ctx.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
     else:
         embed = discord.Embed(title='오류', description='알 수 없는 오류가 발생했습니다.', color=0xff0000)
-        await ctx.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
 
 
 
@@ -132,24 +132,24 @@ async def warn_error(ctx, error):
 async def notice(interaction: discord.Interaction, 내용: str):
     channel = bot.get_channel(1094255511609802792)
     if channel is None:
-        await interaction.send('공지 채널을 찾을 수 없습니다.')
+        await interaction.response.send_message('공지 채널을 찾을 수 없습니다.')
         return
     embed=discord.Embed(title="공지", description='> ' + 내용 + ' \n \n ||@everyone||', color=0x00ff00)
     await channel.send(embed=embed)
     embed = discord.Embed(title='성공', description='공지를 보냈습니다.', color=0x00ff00)
-    await interaction.send(embed=embed)
+    await interaction.response.send_message(embed=embed)
 
 @notice.error
-async def notice_error(ctx, error):
+async def notice_error(interaction: discord.Interaction, error):
     if isinstance(error, commands.MissingPermissions):
         embed = discord.Embed(title='오류', description='당신은 관리자 권한이 없습니다.', color=0xff0000)
-        await ctx.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
     elif isinstance(error, commands.MissingRequiredArgument):
         embed = discord.Embed(title='오류', description='공지 내용을 입력해주세요.', color=0xff0000)
-        await ctx.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
     else:
         embed = discord.Embed(title='오류', description='알 수 없는 오류가 발생했습니다.', color=0xff0000)
-        await ctx.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
 
         
         
