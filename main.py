@@ -10,8 +10,7 @@ intents = discord.Intents.default()
 intents.members = True
 intents.presences = True
 intents.message_content = True
-bot = commands.Bot(command_prefix='매코 ', intents=discord.Intents.all()) # 호출 명령어를 '매코 ' 로 설정함.
-
+bot = commands.Bot(command_prefix = "매코야 ", intents=discord.Intents.all()) 
 
 bot.remove_command('help') # 기본 help 명령어를 제거함.
 
@@ -102,7 +101,7 @@ async def clear_chat_error(interaction: discord.Interaction, error):
 @commands.has_permissions(administrator=True)
 @app_commands.describe(유저="경고를 줄 유저", 사유="경고 사유")
 async def warn(interaction: discord.Interaction, 유저: discord.Member, 사유: str):
-    channel = bot.get_channel(1091003605240266875)
+    channel = bot.get_channel(1091003605240266875) # 경고 채널 ID
     if channel is None:
         await interaction.response.send_message('경고 채널을 찾을 수 없습니다.')
         return
@@ -122,6 +121,29 @@ async def warn_error(interaction: discord.Interaction, error):
     else:
         embed = discord.Embed(title='오류', description='알 수 없는 오류가 발생했습니다.', color=0xff0000)
         await interaction.response.send_message(embed=embed)
+
+
+
+@bot.tree.command(name="차단", description="/차단 @대상 사유") # '차단' 명령어
+@app_commands.describe(유저="차단할 유저", 사유="차단 사유")
+@commands.has_permissions(administrator=True)
+async def ban(interaction: discord.Interaction, 유저: discord.Member, 사유: str):
+    channel = bot.get_channel(1091003605240266875) # 경고 채널 ID
+    await 유저.add_roles(유저.guild.get_role(1105071533161992244))
+
+    
+    for i in 유저.roles: # 모든 역할을 제거함.
+        try:
+            await 유저.remove_roles(i)
+        except:
+            banned_message = f"__{유저}__ 님이 서버에서 차단되었습니다.\n> 사유: {사유}"
+            await channel.send(banned_message)
+            embed = discord.Embed(title='성공', description=f'{유저} 님을 차단했습니다.', color=0x00ff00)
+            await interaction.response.send_message(embed=embed)
+            
+        
+
+    
 
 
 
