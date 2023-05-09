@@ -1,6 +1,6 @@
 <div align=center>
 
-# Functional Experimental Bot
+# GamePain Server Admin Bot
 
 
 
@@ -10,20 +10,10 @@
 
 IDE: <a href="https://code.visualstudio.com/"><img src="https://img.shields.io/badge/VSC-007ACC?style=flat-square&logo=Visual Studio Code&logoColor=white"/></a>
 
-### 구현중인 기능
+### 개발자
 
-> **서버 관리**
->> 채팅 청소 <br>
->> 뮤트<Br>
->> 경고<br>
->> 공지<br>
+매코#0663 <a href="https://discord.com/users/263929094306005000"><img src="https://img.shields.io/badge/Developer-GamePain-9cf?style=flat-square&logo=discord&logoColor=white"/></a>
 
-> **유저 관리**
->> 랭킹 (경험치, 레벨)<br>
-
-> *구상중인 기능*
->> 주식 <br>
->> 미니게임 <br>
 
 
 
