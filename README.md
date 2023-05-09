@@ -12,8 +12,10 @@ IDE: <a href="https://code.visualstudio.com/"><img src="https://img.shields.io/b
 
 ### 개발자
 
-매코#0663 <a href="https://discord.com/users/263929094306005000"><img src="https://img.shields.io/badge/Developer-GamePain-9cf?style=flat-square&logo=discord&logoColor=white"/></a>
+<a href="https://discord.com/users/263929094306005000"><img src="https://img.shields.io/badge/GamePain-Owner-9cf?style=flat-square&logo=discord&logoColor=white"/></a>
 
+<bn>
+discord: 매코#0663
 
 
 
