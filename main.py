@@ -105,7 +105,7 @@ async def clear_chat_error(interaction: discord.Interaction, error):
 @commands.has_permissions(administrator=True)
 @app_commands.describe(유저="경고를 줄 유저", 사유="경고 사유")
 async def warn(interaction: discord.Interaction, 유저: discord.Member, 사유: str):
-    channel = bot.get_channel(1091003605240266875) # 처벌 채널 ID
+    channel = bot.get_channel(878886065321160745) # 처벌 채널 ID
     if channel is None:
         await interaction.response.send_message('경고 채널을 찾을 수 없습니다.')
         return
@@ -144,7 +144,7 @@ async def ban(interaction: discord.Interaction, 유저: discord.Member, 사유: 
         try:
             await 유저.remove_roles(i)
         except:
-            channel = bot.get_channel(1091003605240266875) # 처벌 채널 ID
+            channel = bot.get_channel(878886065321160745) # 처벌 채널 ID
             await 유저.add_roles(유저.guild.get_role(1105071533161992244))
             if channel is None:
                 await interaction.response.send_message('처벌 채널을 찾을 수 없습니다.')
@@ -171,7 +171,7 @@ async def ban(interaction: discord.Interaction, 유저: discord.Member, 사유: 
 @app_commands.describe(내용="공지 내용")
 @commands.has_permissions(administrator=True)
 async def notice(interaction: discord.Interaction, 내용: str, 멘션: bool = False):
-    channel = bot.get_channel(1094255511609802792)
+    channel = bot.get_channel(878870335863287818)
     if channel is None:
         await interaction.response.send_message('공지 채널을 찾을 수 없습니다.')
         return
