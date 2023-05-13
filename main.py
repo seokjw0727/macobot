@@ -40,7 +40,7 @@ async def on_ready():
 
 
 
-@bot.event # '매코야' 라는 메시지를 감지하면, 랜덤으로 메시지를 보냄.
+@bot.event # '매코야' 이벤트, 봇이 랜덤으로 메시지를 답함.
 async def on_message(message):
     if message.author.bot:
         return None
@@ -53,9 +53,9 @@ async def on_message(message):
 
 
 
-@bot.tree.command(name="상태", description="봇의 상태를 알려줍니다.") # '상태' 명령어
+@bot.tree.command(name="상태", description="봇의 상태를 알려줍니다.") # '상태' 명령어, 봇의 네트워크 상태를 embed 에 담아서 보냄.
 async def status(interaction: discord.Interaction):
-    if bot.latency * 1000 >= 200:
+    if bot.latency * 1000 >= 100:
         embed_green = discord.Embed(title= "**🔴 상태 나쁨 🔴**", description= f"봇의 네트워크 상태는 **{round(round(bot.latency, 4)*1000)}ms** 입니다.", timestamp=datetime.datetime.now(pytz.timezone('UTC')), color=0xff0000)
         embed_green.set_footer(text= "개발자 | 매코#0663", icon_url="https://cdn.discordapp.com/attachments/878968805760565288/941033278146752542/a896d7f6ec22b5cd.png")
         await interaction.response.send_message(embed=embed_green)
@@ -78,7 +78,7 @@ async def status_error(interaction: discord.Interaction, error):
 
 
 
-@bot.tree.command(name="청소", description="/청소 [1 이상의 자연수] (관리자 권한이 필요합니다.)") # '청소' 명령어
+@bot.tree.command(name="청소", description="/청소 [1 이상의 자연수] (관리자 권한이 필요합니다.)") # '청소' 명령어, 메시지를 청소함.
 @commands.has_permissions(administrator=True)
 @app_commands.describe(amount="청소할 메시지의 개수")
 async def clear_chat(interaction: discord.Interaction, amount: int):
@@ -101,7 +101,7 @@ async def clear_chat_error(interaction: discord.Interaction, error):
 
 
 
-@bot.tree.command(name="경고", description="/경고 @대상 [사유] (관리자 권한이 필요합니다.)") # '경고' 명령어
+@bot.tree.command(name="경고", description="/경고 @대상 [사유] (관리자 권한이 필요합니다.)") # '경고' 명령어, 경고 embed 를 처벌 채널에 보내고, 유저에게 dm을 보냄.
 @commands.has_permissions(administrator=True)
 @app_commands.describe(유저="경고를 줄 유저", 사유="경고 사유")
 async def warn(interaction: discord.Interaction, 유저: discord.Member, 사유: str):
@@ -135,7 +135,7 @@ async def warn_error(interaction: discord.Interaction, error):
 
 
 
-@bot.tree.command(name="차단", description="/차단 @대상 [사유] (관리자 권한이 필요합니다.)") # '차단' 명령어
+@bot.tree.command(name="차단", description="/차단 @대상 [사유] (관리자 권한이 필요합니다.)") # '차단' 명령어, 차단 embed 를 처벌 채널에 보내고, 유저에게 dm을 보냄.
 @app_commands.describe(유저="차단할 유저", 사유="차단 사유")
 @commands.has_permissions(administrator=True)
 async def ban(interaction: discord.Interaction, 유저: discord.Member, 사유: str):
@@ -167,7 +167,7 @@ async def ban(interaction: discord.Interaction, 유저: discord.Member, 사유: 
 
 
 
-@bot.tree.command(name="공지", description="/공지 [내용] (관리자 권한이 필요합니다.)") # '공지' 명령어
+@bot.tree.command(name="공지", description="/공지 [내용] (관리자 권한이 필요합니다.)") # '공지' 명령어, 공지 embed 를 공지 채널에 보냄.
 @app_commands.describe(내용="공지 내용")
 @commands.has_permissions(administrator=True)
 async def notice(interaction: discord.Interaction, 내용: str, 멘션: bool = False):
@@ -197,7 +197,7 @@ async def notice_error(interaction: discord.Interaction, error):
 
         
         
-@bot.tree.command(name="초대", description="서버 초대링크를 확인합니다.") # '초대' 명령어
+@bot.tree.command(name="초대", description="서버 초대링크를 확인합니다.") # '초대' 명령어, 서버의 초대 코드를 유저에게 dm으로 보냄.
 async def invite_link(interaction: discord.Interaction):
     invite_link = "https://discord.gg/gakU7vUP5H"
 
