@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import datetime
 import pytz
 import asyncio
-
+from webdriver import keep_alive
 intents = discord.Intents.default()
 intents.members = True
 intents.presences = True
@@ -214,35 +214,6 @@ async def invite_link_error(interaction: discord.Interaction, error):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-load_dotenv('token.env')
-bot.run(os.getenv('bot_token'))
+keep_alive()
+load_dotenv('secret.json')
+bot.run(os.getenv('token'))
