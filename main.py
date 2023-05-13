@@ -141,7 +141,7 @@ async def ban(interaction: discord.Interaction, 유저: discord.Member, 사유: 
             await 유저.remove_roles(i)
         except:
             channel = bot.get_channel(878886065321160745) # 처벌 채널 ID
-            await 유저.add_roles(유저.guild.get_role(1105071533161992244))
+            await 유저.add_roles(유저.guild.get_role(878966349701971999))
             if channel is None:
                 await interaction.response.send_message('처벌 채널을 찾을 수 없습니다.')
                 return
