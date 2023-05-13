@@ -18,7 +18,7 @@ bot.remove_command('help') # 기본 help 명령어를 제거함.
 
 @bot.event # 봇이 준비되면, 봇의 상태를 '개발'으로 바꾸고, 봇의 핑을 출력함.
 async def on_ready():
-    await bot.change_presence(activity=discord.Game(name='개발'))
+    await bot.change_presence(activity=discord.ActivityType.listening(name='매코야'))
     os.system('cls')
     print('-------------------------')
     print(f'현재 네트워크 상태 : {round(round(bot.latency, 4)*1000)}ms')
