@@ -57,11 +57,9 @@ async def on_message(message):
 async def status(interaction: discord.Interaction):
     if bot.latency * 1000 >= 100:
         embed_green = discord.Embed(title= "**🔴 상태 나쁨 🔴**", description= f"봇의 네트워크 상태는 **{round(round(bot.latency, 4)*1000)}ms** 입니다.", timestamp=datetime.datetime.now(pytz.timezone('UTC')), color=0xff0000)
-        embed_green.set_footer(text= "개발자 | 매코#0663", icon_url="https://cdn.discordapp.com/attachments/878968805760565288/941033278146752542/a896d7f6ec22b5cd.png")
         await interaction.response.send_message(embed=embed_green)
     else:
         embed_red = discord.Embed(title= "**🟢 상태 좋음 🟢**", description= f"봇의 네트워크 상태는 **{round(round(bot.latency, 4)*1000)}ms** 입니다.", timestamp=datetime.datetime.now(pytz.timezone('UTC')), color=0x00ff00)
-        embed_red.set_footer(text= "개발자 | 매코#0663", icon_url="https://cdn.discordapp.com/attachments/878968805760565288/941033278146752542/a896d7f6ec22b5cd.png")
         await interaction.response.send_message(embed=embed_red)
 
 @status.error
@@ -90,7 +88,6 @@ async def clear_chat(interaction: discord.Interaction, amount: int):
         await interaction.channel.purge(limit=amount + 1)
         embed = discord.Embed(title= "🧹 **채팅 청소** 🧹", description= f"__{amount}__ 개의 메시지를 청소했습니다. \n 　", timestamp= datetime.datetime.now(pytz.timezone('UTC')), color= 0x99ffff)
         embed.add_field(name= "처리자", value= f"<@{interaction.user.id}>", inline= False)
-        embed.set_footer(text= "개발자 | 매코#0663", icon_url= "https://cdn.discordapp.com/attachments/878968805760565288/941033278146752542/a896d7f6ec22b5cd.png")
         await interaction.channel.send(embed=embed)
 
 @clear_chat.error
@@ -114,7 +111,6 @@ async def warn(interaction: discord.Interaction, 유저: discord.Member, 사유:
     embed = discord.Embed(title= "❗ **경고** ❗", description= f"관리자가 *{유저}* 에게 경고를 부여했습니다!", timestamp= datetime.datetime.now(pytz.timezone('UTC')), color= 0xff0000)
     embed.add_field(name= "사유", value= f"{사유}")
     embed.add_field(name= "처리자", value= interaction.user.mention, inline= False)
-    embed.set_footer(text = "개발자 | 매코#0663", icon_url="https://cdn.discordapp.com/attachments/878968805760565288/941033278146752542/a896d7f6ec22b5cd.png")
     await channel.send(embed=embed)
     await interaction.response.send_message(f'*{유저.mention}* 을(를) 경고했습니다.')
 
@@ -154,7 +150,6 @@ async def ban(interaction: discord.Interaction, 유저: discord.Member, 사유: 
             embed = discord.Embed(title= "⛔ **차단** ⛔", description= f"관리자가 *{유저}* 을(를) 차단했습니다!", timestamp= datetime.datetime.now(pytz.timezone('UTC')), color= 0xff0000)
             embed.add_field(name= "사유", value= f"{사유}")
             embed.add_field(name= "처리자", value= interaction.user.mention, inline= False)
-            embed.set_footer(text = "개발자 | 매코#0663", icon_url="https://cdn.discordapp.com/attachments/878968805760565288/941033278146752542/a896d7f6ec22b5cd.png")
             await channel.send(embed=embed)
             await interaction.response.send_message(f'*{유저.mention}* 을(를) 차단했습니다.')
 
@@ -177,12 +172,10 @@ async def notice(interaction: discord.Interaction, 내용: str, 멘션: bool = F
         return
     if 멘션 == True:
         embed=discord.Embed(title="🔔 **공지사항** 🔔", description=f"\n\n{내용} ||@everyone||", timestamp= datetime.datetime.now(pytz.timezone('UTC')), color= 0xFF6633)
-        embed.set_footer(text = "개발자 | 매코#0663", icon_url= "https://cdn.discordapp.com/attachments/878968805760565288/941033278146752542/a896d7f6ec22b5cd.png")
         await channel.send(embed=embed)
         await interaction.response.send_message('공지를 보냈습니다.', ephemeral=True)
     else:
         embed=discord.Embed(title="🔔 **공지사항** 🔔", description=f"\n\n{내용}\n\n", timestamp= datetime.datetime.now(pytz.timezone('UTC')), color= 0xFF6633)
-        embed.set_footer(text = "개발자 | 매코#0663", icon_url= "https://cdn.discordapp.com/attachments/878968805760565288/941033278146752542/a896d7f6ec22b5cd.png")
         await channel.send(embed=embed)
         await interaction.response.send_message('공지를 보냈습니다.', ephemeral=True)
 
@@ -210,6 +203,18 @@ async def invite_link_error(interaction: discord.Interaction, error):
     embed = discord.Embed(title='🛑오류🛑', description='알 수 없는 오류가 발생했습니다.', color=0xff0000)
     await interaction.response.send_message(embed=embed)
 
+
+
+@bot.tree.command(name="크레딧", description="봇의 크레딧을 확인합니다.") # '크레딧' 명령어, 봇의 크레딧을 embed 로 보냄.
+async def credit(interaction: discord.Interaction):
+    embed = discord.Embed(title='🎖️ **크레딧** 🎖️', description='오래된 겜펜봇을 대체하고자 만들어진 매코봇입니다.', color=0xffffff)
+    embed.add_field(name='개발자', value='`매코#0663`', inline=False)
+    embed.add_field(name='개발 시작일', value='`2023년 3월 25일`', inline=False)
+    embed.add_field(name='개발 종료일', value='`2021년 5월 13일`', inline=False)
+    embed.add_field(name='개발 언어', value='`Python`', inline=False)
+    embed.add_field(name='개발 라이브러리', value='`discord.py`', inline=False)
+    embed.set_footer(text='*All rights reserved. © 2023. 매코*')
+    await interaction.response.send_message(embed=embed, ephemeral=True)
 
 
 
