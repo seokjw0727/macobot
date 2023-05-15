@@ -6,7 +6,7 @@ from discord import app_commands
 from dotenv import load_dotenv
 import datetime
 import pytz
-import asyncio
+from mcstatus import MinecraftServer
 from webdriver import keep_alive
 intents = discord.Intents.default()
 intents.members = True
@@ -215,6 +215,25 @@ async def credit(interaction: discord.Interaction):
     embed.add_field(name='개발 라이브러리', value='`discord.py`', inline=False)
     embed.set_footer(text='*All rights reserved. © 2023. 매코*')
     await interaction.response.send_message(embed=embed, ephemeral=True)
+
+
+
+@bot.tree.command(name= "마크", description="마인크래프트 서버의 상태를 확인합니다.") # '마크' 명령어, 마인크래프트 서버의 상태를 확인함.
+async def minecraft_server_check(interaction: discord.Interaction):
+    server = MinecraftServer.lookup("mc.hypixel.net")
+    status = server.status()
+    embed = discord.Embed(title='🎮 **마인크래프트 서버 상태** 🎮', description='현재 마인크래프트 서버의 상태입니다.', color=0xffffff)
+    embed.add_field(name='서버 주소', value='`mc.hypixel.net`', inline=False)
+    embed.add_field(name='서버 버전', value=f'`{status.version.name}`', inline=False)
+    embed.add_field(name='현재 플레이어 수', value=f'`{status.players.online}`명', inline=False)
+    embed.add_field(name='최대 플레이어 수', value=f'`{status.players.max}`명', inline=False)
+    embed.set_footer(text='*All rights reserved. © 2023. 매코*')
+    await interaction.response.send_message(embed=embed)
+
+
+
+
+
 
 
 
