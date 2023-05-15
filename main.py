@@ -6,7 +6,8 @@ from discord import app_commands
 from dotenv import load_dotenv
 import datetime
 import pytz
-from mcstatus import MinecraftServer
+import asyncio
+from mcstatus import JavaServer
 from webdriver import keep_alive
 intents = discord.Intents.default()
 intents.members = True
@@ -220,7 +221,7 @@ async def credit(interaction: discord.Interaction):
 
 @bot.tree.command(name= "마크", description="마인크래프트 서버의 상태를 확인합니다.") # '마크' 명령어, 마인크래프트 서버의 상태를 확인함.
 async def minecraft_server_check(interaction: discord.Interaction):
-    server = MinecraftServer.lookup("macosv.kro.kr")
+    server = JavaServer.lookup("macosv.kro.kr")
     status = server.status()
     embed = discord.Embed(title='🎮 **마인크래프트 서버 상태** 🎮', description='현재 마인크래프트 서버의 상태입니다.', color=0xffffff)
     embed.add_field(name='서버 주소', value='`macosv.kro.kr`', inline=False)
@@ -229,11 +230,8 @@ async def minecraft_server_check(interaction: discord.Interaction):
     embed.add_field(name='최대 플레이어 수', value=f'`{status.players.max}`명', inline=False)
     await interaction.response.send_message(embed=embed)
 
-@minecraft_server_check.error
-async def minecraft_server_check_error(interaction: discord.Interaction, error):
-    embed = discord.Embed(title='🛑오류🛑', description='알 수 없는 오류가 발생했습니다.', color=0xff0000)
-    await interaction.response.send_message(embed=embed)
-    
+
+
 
 
 
