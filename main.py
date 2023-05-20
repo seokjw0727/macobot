@@ -229,6 +229,15 @@ async def minecraft_server_check(interaction: discord.Interaction):
     embed.add_field(name='현재 플레이어 수', value=f'`{status.players.online}`명', inline=False)
     embed.add_field(name='최대 플레이어 수', value=f'`{status.players.max}`명', inline=False)
     await interaction.response.send_message(embed=embed)
+    if server.status is None:
+        embed = discord.Embed(title='🛑오류🛑', description='알 수 없는 오류가 발생했습니다.', color=0xff0000)
+        await interaction.response.send_message(embed=embed)
+        
+
+@minecraft_server_check.error
+async def minecraft_server_check_error(interaction: discord.Interaction, error):
+    embed = discord.Embed(title='🛑오류🛑', description='알 수 없는 오류가 발생했습니다.', color=0xff0000)
+    await interaction.response.send_message(embed=embed)
 
 
 
