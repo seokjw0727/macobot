@@ -231,7 +231,7 @@ async def minecraft_server_check(interaction: discord.Interaction):
         embed.add_field(name='최대 접속자 수', value=f'`{status.players.max}`명', inline=False)
         embed.add_field(name='서버 핑', value=f'{round(status.latency)}ms', inline=False)
         await interaction.response.send_message(embed=embed)
-    except:
+    except ConnectionError:
         embed = discord.Embed(title='🔴 **서버 닫힘** 🔴', description='현재 서버가 닫혀있습니다.', color=0xff0000)
         await interaction.response.send_message(embed=embed)
 
