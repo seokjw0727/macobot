@@ -237,12 +237,6 @@ async def minecraft_server_check(interaction: discord.Interaction):
 
 
 
-@minecraft_server_check.error
-async def minecraft_server_check_error(interaction: discord.Interaction, error):
-    embed = discord.Embed(title='🛑오류🛑', description='알 수 없는 오류가 발생했습니다.', color=0xff0000)
-    await interaction.response.send_message(embed=embed)
-
-
 
 
 
