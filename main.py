@@ -221,21 +221,20 @@ async def credit(interaction: discord.Interaction):
 
 @bot.tree.command(name= "마크", description="마인크래프트 서버의 상태를 확인합니다.") # '마크' 명령어, 마인크래프트 서버의 상태를 확인함.
 async def minecraft_server_check(interaction: discord.Interaction):
-    server = JavaServer.lookup("macosv.kro.kr")
-    status = server.status()
-    # 만약 서버가 닫혀있다면, 서버가 닫혀있음을 embed 함.
-    if status.latency is None:
-        embed = discord.Embed(title='🔴 **서버 닫힘** 🔴', description='현재 서버가 닫혀있습니다.', color=0xff0000)
-        await interaction.response.send_message(embed=embed)
-    # 만약 서버가 열려있다면, 서버가 열려있음을 embed 함.
-    else:
+    try:
+        server = JavaServer.lookup("macosv.kro.kr")
+        status = server.status()
+
         embed = discord.Embed(title='🟢 **서버 열림** 🟢', description='현재 서버가 열려있습니다.', color=0x00ff00)
-        embed.add_field(name='서버 이름', value='`매코 서버`', inline=False)
         embed.add_field(name='서버 버전', value=f'`{status.version.name}`', inline=False)
         embed.add_field(name='현재 접속자 수', value=f'`{status.players.online}`명', inline=False)
         embed.add_field(name='최대 접속자 수', value=f'`{status.players.max}`명', inline=False)
+        embed.add_field(name='서버 핑', value=f'{round(status.latency)}ms', inline=False)
         await interaction.response.send_message(embed=embed)
-    
+    except:
+        embed = discord.Embed(title='🔴 **서버 닫힘** 🔴', description='현재 서버가 닫혀있습니다.', color=0xff0000)
+        await interaction.response.send_message(embed=embed)
+
 
 
 @minecraft_server_check.error
