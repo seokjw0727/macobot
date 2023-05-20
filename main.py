@@ -223,16 +223,20 @@ async def credit(interaction: discord.Interaction):
 async def minecraft_server_check(interaction: discord.Interaction):
     server = JavaServer.lookup("macosv.kro.kr")
     status = server.status()
-    embed = discord.Embed(title='🎮 **마인크래프트 서버 상태** 🎮', description='현재 마인크래프트 서버의 상태입니다.', color=0xffffff)
-    embed.add_field(name='서버 주소', value='`macosv.kro.kr`', inline=False)
-    embed.add_field(name='서버 버전', value=f'`{status.version.name}`', inline=False)
-    embed.add_field(name='현재 플레이어 수', value=f'`{status.players.online}`명', inline=False)
-    embed.add_field(name='최대 플레이어 수', value=f'`{status.players.max}`명', inline=False)
-    await interaction.response.send_message(embed=embed)
-    if server.status is None:
-        embed = discord.Embed(title='🛑오류🛑', description='알 수 없는 오류가 발생했습니다.', color=0xff0000)
+    # 만약 서버가 닫혀있다면, 서버가 닫혀있음을 embed 함.
+    if status.ConnectionError == True:
+        embed = discord.Embed(title='🔴 **서버 닫힘** 🔴', description='현재 서버가 닫혀있습니다.', color=0xff0000)
         await interaction.response.send_message(embed=embed)
-        
+    # 만약 서버가 열려있다면, 서버가 열려있음을 embed 함.
+    else:
+        embed = discord.Embed(title='🟢 **서버 열림** 🟢', description='현재 서버가 열려있습니다.', color=0x00ff00)
+        embed.add_field(name='서버 이름', value='`매코 서버`', inline=False)
+        embed.add_field(name='서버 버전', value=f'`{status.version.name}`', inline=False)
+        embed.add_field(name='현재 접속자 수', value=f'`{status.players.online}`명', inline=False)
+        embed.add_field(name='최대 접속자 수', value=f'`{status.players.max}`명', inline=False)
+        await interaction.response.send_message(embed=embed)
+    
+
 
 @minecraft_server_check.error
 async def minecraft_server_check_error(interaction: discord.Interaction, error):
