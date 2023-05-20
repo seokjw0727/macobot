@@ -223,7 +223,7 @@ async def credit(interaction: discord.Interaction):
 async def minecraft_server_check(interaction: discord.Interaction):
     try:
         server = JavaServer.lookup("macosv.kro.kr")
-        status = server.status()
+        status = server.status
 
         embed = discord.Embed(title='🟢 **서버 열림** 🟢', description='현재 서버가 열려있습니다.', color=0x00ff00)
         embed.add_field(name='서버 버전', value=f'`{status.version.name}`', inline=False)
