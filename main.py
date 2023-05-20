@@ -224,7 +224,7 @@ async def minecraft_server_check(interaction: discord.Interaction):
     server = JavaServer.lookup("macosv.kro.kr")
     status = server.status()
     # 만약 서버가 닫혀있다면, 서버가 닫혀있음을 embed 함.
-    if status.ConnectionError == True:
+    if status.latency is None:
         embed = discord.Embed(title='🔴 **서버 닫힘** 🔴', description='현재 서버가 닫혀있습니다.', color=0xff0000)
         await interaction.response.send_message(embed=embed)
     # 만약 서버가 열려있다면, 서버가 열려있음을 embed 함.
