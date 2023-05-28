@@ -231,6 +231,12 @@ async def credit(interaction: discord.Interaction):
 
 
 
+@bot.tree.command(name= "마크", description="🛠️ 수리중 🛠️")
+async def minecraft_server_check(interaction: discord.Interaction):
+    await interaction.response.send_message("명령어 접근이 차단되었습니다.", ephemeral=True);
+
+
+
 
 
 
