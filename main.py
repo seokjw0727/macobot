@@ -6,7 +6,7 @@ from discord import app_commands
 from dotenv import load_dotenv
 import datetime
 import pytz
-import asyncio
+import socket
 from mcstatus import JavaServer
 from webdriver import keep_alive
 intents = discord.Intents.default()
@@ -222,7 +222,7 @@ async def credit(interaction: discord.Interaction):
     embed = discord.Embed(title='🎖️ **크레딧** 🎖️', description='오래된 겜펜봇을 대체하고자 만들어진 매코봇입니다.', color=0xffffff)
     embed.add_field(name='개발자', value='`매코#0663`', inline=False)
     embed.add_field(name='개발 시작일', value='`2023년 3월 25일`', inline=False)
-    embed.add_field(name='개발 종료일', value='`2021년 5월 13일`', inline=False)
+    embed.add_field(name='개발 종료일', value='`2023년 5월 13일`', inline=False)
     embed.add_field(name='개발 언어', value='`Python`', inline=False)
     embed.add_field(name='개발 라이브러리', value='`discord.py`', inline=False)
     embed.set_footer(text='*All rights reserved. © 2023. 매코*')
@@ -236,6 +236,31 @@ async def minecraft_server_check(interaction: discord.Interaction):
     await interaction.response.send_message("명령어 접근이 차단되었습니다.", ephemeral=True);
 
 
+
+# @bot.tree.command(name= "minecraft_server_check", description= "매코 서버의 상태를 확인합니다.")
+# async def minecraft_server_check(interaction: discord.Interaction):
+#     try:
+#         # Create a TCP socket connection to the Minecraft server
+#         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#         sock.settimeout(1)
+#         result = sock.connect_ex(('macosv.kro.kr', '25565'))
+#         sock.close()
+
+#         if result == 0:
+#             return True  # Server is open
+#         else:
+#             return False  # Server is closed
+
+#     except socket.error:
+#         return False  # Server is closed
+
+#     while True:
+#         if minecraft_server_check() == True:
+#             embed = discord.Embed(title='🟢 **서버 열림** 🟢', description='현재 서버가 열려있습니다.', color=0x00ff00)
+#             await interaction.response.send_message(embed=embed)
+#         else:
+#             embed = discord.Embed(title='🔴 **서버 닫힘** 🔴', description='현재 서버가 닫혀있습니다.', color=0xff0000)
+#             await interaction.response.send_message(embed=embed)
 
 
 
