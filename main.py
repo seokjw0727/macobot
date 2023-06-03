@@ -237,32 +237,34 @@ async def minecraft_server_check(interaction: discord.Interaction):
 
 
 
-# @bot.tree.command(name= "minecraft_server_check", description= "매코 서버의 상태를 확인합니다.")
-# async def minecraft_server_check(interaction: discord.Interaction):
-#     try:
-#         # Create a TCP socket connection to the Minecraft server
-#         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#         sock.settimeout(1)
-#         result = sock.connect_ex(('macosv.kro.kr', '25565'))
-#         sock.close()
+@bot.tree.command(name= "minecraft_server_check", description= "매코 서버의 상태를 확인합니다.")
+@commands.has_permissions(administrator=True)
+async def minecraft_server_check_test_version(interaction: discord.Interaction):
+    logging_channel = bot.get_channel(1106905134451146813)
+    try:
+        server = JavaServer.lookup("macosv.kro.kr")
+        status = server.status
 
-#         if result == 0:
-#             return True  # Server is open
-#         else:
-#             return False  # Server is closed
+        embed = discord.Embed(title='🟢 **서버 열림** 🟢', description='현재 서버가 열려있습니다.', color=0x00ff00)
+        embed.add_field(name='서버 버전', value=f'`{status.version.name}`', inline=False)
+        embed.add_field(name='현재 접속자 수', value=f'`{status.players.online}`명', inline=False)
+        embed.add_field(name='최대 접속자 수', value=f'`{status.players.max}`명', inline=False)
+        embed.add_field(name='서버 핑', value=f'{round(status.latency)}ms', inline=False)
+        await interaction.response.send_message(embed=embed)
+    except ConnectionError:
+        embed = discord.Embed(title='🔴 **서버 닫힘** 🔴', description='현재 서버가 닫혀있습니다.', color=0xff0000)
+        await interaction.response.send_message(embed=embed)
+    await logging_channel.send(f"{interaction.user} 님이 '/minecraft_server_check' 명령어를 사용했습니다.")
 
-#     except socket.error:
-#         return False  # Server is closed
-
-#     while True:
-#         if minecraft_server_check() == True:
-#             embed = discord.Embed(title='🟢 **서버 열림** 🟢', description='현재 서버가 열려있습니다.', color=0x00ff00)
-#             await interaction.response.send_message(embed=embed)
-#         else:
-#             embed = discord.Embed(title='🔴 **서버 닫힘** 🔴', description='현재 서버가 닫혀있습니다.', color=0xff0000)
-#             await interaction.response.send_message(embed=embed)
-
-
+@minecraft_server_check_test_version.error
+async def minecraft_server_check_test_version_error(interaction: discord.Interaction, error):
+    if isinstance(error, commands.MissingPermissions):
+        embed = discord.Embed(title='❌거부❌', description='당신은 관리자 권한이 없습니다.', color=0xff0000)
+        await interaction.response.send_message(embed=embed)
+    else:
+        embed = discord.Embed(title='🛑오류🛑', description='알 수 없는 오류가 발생했습니다.', color=0xff0000)
+        await interaction.response.send_message(embed=embed)
+        
 
 
 
