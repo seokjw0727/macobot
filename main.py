@@ -231,6 +231,57 @@ async def credit(interaction: discord.Interaction):
 
 
 
+@bot.event
+async def on_voice_state_update(member, before, after):
+    channel = bot.get_channel(1008066418127937586)
+    if after.channel is bot.get_channel(878881493806633010) and member.guild.get_role(878975480412381214) in member.roles:
+        await channel.send(f"{member.name} 님이 음성 채널에 접속하셨습니다.")
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @bot.tree.command(name= "마크", description="🛠️ 수리중 🛠️")
 async def minecraft_server_check(interaction: discord.Interaction):
     await interaction.response.send_message("명령어 접근이 차단되었습니다.", ephemeral=True);
