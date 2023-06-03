@@ -56,7 +56,7 @@ async def on_message(message):
 
 @bot.tree.command(name="상태", description="봇의 상태를 알려줍니다.") # '상태' 명령어, 봇의 네트워크 상태를 embed 에 담아서 보냄.
 async def status(interaction: discord.Interaction):
-    logging_channel = bot.get_channel(1106905134451146813)
+    logging_channel = bot.get_channel(1114564440092835990)
     if bot.latency * 1000 >= 100:
         embed_green = discord.Embed(title= "**🔴 상태 나쁨 🔴**", description= f"봇의 네트워크 상태는 **{round(round(bot.latency, 4)*1000)}ms** 입니다.", timestamp=datetime.datetime.now(pytz.timezone('UTC')), color=0xff0000)
         await interaction.response.send_message(embed=embed_green)
@@ -83,7 +83,7 @@ async def status_error(interaction: discord.Interaction, error):
 @commands.has_permissions(administrator=True)
 @app_commands.describe(amount="청소할 메시지의 개수")
 async def clear_chat(interaction: discord.Interaction, amount: int):
-    logging_channel = bot.get_channel(1106905134451146813)
+    logging_channel = bot.get_channel(1114564440092835990)
     if amount < 1 :
         embed = discord.Embed(title='오류', description='1 이상의 자연수를 입력해주세요.', color=0xff0000)
         await interaction.response.send_message(embed=embed)
@@ -107,7 +107,7 @@ async def clear_chat_error(interaction: discord.Interaction, error):
 @commands.has_permissions(administrator=True)
 @app_commands.describe(유저="경고를 줄 유저", 사유="경고 사유")
 async def warn(interaction: discord.Interaction, 유저: discord.Member, 사유: str):
-    logging_channel = bot.get_channel(1106905134451146813)
+    logging_channel = bot.get_channel(1114564440092835990)
     channel = bot.get_channel(878886065321160745) # 처벌 채널 ID
     if channel is None:
         await interaction.response.send_message('경고 채널을 찾을 수 없습니다.')
@@ -141,7 +141,7 @@ async def warn_error(interaction: discord.Interaction, error):
 @app_commands.describe(유저="차단할 유저", 사유="차단 사유")
 @commands.has_permissions(administrator=True)
 async def ban(interaction: discord.Interaction, 유저: discord.Member, 사유: str):
-    logging_channel = bot.get_channel(1106905134451146813)
+    logging_channel = bot.get_channel(1114564440092835990)
     
     for i in 유저.roles: # 모든 역할을 제거함.
         try:
@@ -173,7 +173,7 @@ async def ban(interaction: discord.Interaction, 유저: discord.Member, 사유: 
 @app_commands.describe(내용="공지 내용")
 @commands.has_permissions(administrator=True)
 async def notice(interaction: discord.Interaction, 내용: str, 멘션: bool = False):
-    logging_channel = bot.get_channel(1106905134451146813)
+    logging_channel = bot.get_channel(1114564440092835990)
     channel = bot.get_channel(878870335863287818)
     if channel is None:
         await interaction.response.send_message('공지 채널을 찾을 수 없습니다.')
@@ -201,7 +201,7 @@ async def notice_error(interaction: discord.Interaction, error):
         
 @bot.tree.command(name="초대", description="서버 초대링크를 확인합니다.") # '초대' 명령어, 서버의 초대 코드를 유저에게 dm으로 보냄.
 async def invite_link(interaction: discord.Interaction):
-    logging_channel = bot.get_channel(1106905134451146813)
+    logging_channel = bot.get_channel(1114564440092835990)
     invite_link = "https://discord.gg/gakU7vUP5H"
 
     embed = discord.Embed(title='초대링크', description= f'{invite_link}', color=0xffffff)
@@ -218,7 +218,7 @@ async def invite_link_error(interaction: discord.Interaction, error):
 
 @bot.tree.command(name="크레딧", description="봇의 크레딧을 확인합니다.") # '크레딧' 명령어, 봇의 크레딧을 embed 로 보냄.
 async def credit(interaction: discord.Interaction):
-    logging_channel = bot.get_channel(1106905134451146813)
+    logging_channel = bot.get_channel(1114564440092835990)
     embed = discord.Embed(title='🎖️ **크레딧** 🎖️', description='오래된 겜펜봇을 대체하고자 만들어진 매코봇입니다.', color=0xffffff)
     embed.add_field(name='개발자', value='`매코#0663`', inline=False)
     embed.add_field(name='개발 시작일', value='`2023년 3월 25일`', inline=False)
@@ -240,7 +240,7 @@ async def minecraft_server_check(interaction: discord.Interaction):
 @bot.tree.command(name= "minecraft_server_check", description= "매코 서버의 상태를 확인합니다.")
 @commands.has_permissions(administrator=True)
 async def minecraft_server_check_test_version(interaction: discord.Interaction):
-    logging_channel = bot.get_channel(1106905134451146813)
+    logging_channel = bot.get_channel(1114564440092835990)
     try:
         server = JavaServer.lookup("124.60.247.163")
         status = server.status
