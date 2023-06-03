@@ -242,7 +242,7 @@ async def minecraft_server_check(interaction: discord.Interaction):
 async def minecraft_server_check_test_version(interaction: discord.Interaction):
     logging_channel = bot.get_channel(1106905134451146813)
     try:
-        server = JavaServer.lookup("macosv.kro.kr")
+        server = JavaServer.lookup("124.60.247.163")
         status = server.status
 
         embed = discord.Embed(title='🟢 **서버 열림** 🟢', description='현재 서버가 열려있습니다.', color=0x00ff00)
@@ -264,7 +264,7 @@ async def minecraft_server_check_test_version_error(interaction: discord.Interac
     else:
         embed = discord.Embed(title='🛑오류🛑', description='알 수 없는 오류가 발생했습니다.', color=0xff0000)
         await interaction.response.send_message(embed=embed)
-        
+
 
 
 
