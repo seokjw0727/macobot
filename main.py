@@ -233,7 +233,7 @@ async def on_voice_state_update(member, before, after):
     roles_ultra = member.guild.get_role(931000785477730365) # ULTRA 역할
     roles_identity = member.guild.get_role(879589070718771250) # 넘치는 존재감 역할
 
-    if before == after: # 음성 채널에 접속한 경우임.
+    if before.channel is None and after.channel is not None:
         if after.channel is voice_channel_1 and roles_identity in member.roles: # '넘치는 존재감'이 '비' 채널에 접속한 경우임.
             await chat_channel.send(f"✨ 👑**{member.nick}** __**ㄷㄷㄷㅈ!**__ 바로 __🌧비__ 채널에 합류하세요! ✨")
         elif after.channel is voice_channel_1 and roles_ultra in member.roles: # 'ULTRA'가 '비' 채널에 접속한 경우임.
