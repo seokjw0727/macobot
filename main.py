@@ -246,32 +246,32 @@ async def on_voice_state_update(member, before, after): # SUPER, ULTRA 역할이
 
 
     if after.channel is voice_channel_1 and roles_identity in member.roles: # 넘치는 존재감 역할 '비' 채널
-        await chat_channel.send(f"**{member.nick}** 님이 __🌧｜비__ 채널에 __**ㄷㄷㄷㅈ!**__")
+        await chat_channel.send(f"✨ 👑**{member.nick}** __**ㄷㄷㄷㅈ!**__ 바로 __🌧비__ 채널에 합류하세요! ✨")
     elif after.channel is voice_channel_1 and roles_ultra in member.roles: # ULTRA 역할 '비' 채널
-        await chat_channel.send(f"💎방금, __🌧｜비__ 채널에 **{member.nick}** 님이 강림했어요! 💎")
+        await chat_channel.send(f"💎방금, __🌧비__ 채널에 **{member.nick}** 님이 강림했어요! 💎")
     elif after.channel is voice_channel_1 and roles_super in member.roles: # SUPER 역할 '비' 채널
-        await chat_channel.send(f"**{member.nick}** 님이 __🌧｜비__ 채널에 나타났어요!")
+        await chat_channel.send(f"**{member.nick}** 님이 __🌧비__ 채널에 나타났어요!")
 
     elif after.channel is voice_channel_2 and roles_identity in member.roles: # 넘치는 존재감 역할 '맑음' 채널
-        await chat_channel.send(f"**{member.nick}** 님이 __🌞｜맑음__ 채널에 __**ㄷㄷㄷㅈ!**__")
+        await chat_channel.send(f"✨ 👑**{member.nick}** __**ㄷㄷㄷㅈ!**__ 바로 __🌞맑음__ 채널에 합류하세요! ✨ ")
     elif after.channel is voice_channel_2 and roles_ultra in member.roles: # ULTRA 역할 '맑음' 채널
-        await chat_channel.send(f"💎 방금, __🌞｜맑음__ 채널에 **{member.nick}** 님이 강림했어요! 💎")
+        await chat_channel.send(f"💎 방금, __🌞맑음__ 채널에 **{member.nick}** 님이 강림했어요! 💎")
     elif after.channel is voice_channel_2 and roles_super in member.roles: # SUPER 역할 '맑음' 채널
-        await chat_channel.send(f"**{member.nick}** 님이 __🌞｜맑음__ 채널에 나타났어요!")
+        await chat_channel.send(f"**{member.nick}** 님이 __🌞맑음__ 채널에 나타났어요!")
 
     elif after.channel is voice_channel_3 and roles_identity in member.roles: # 넘치는 존재감 역할 '흐림' 채널
-        await chat_channel.send(f"**{member.nick}** 님이 __⛅｜흐림__ 채널에 __**ㄷㄷㄷㅈ!**__")
+        await chat_channel.send(f"✨ 👑**{member.nick}** __**ㄷㄷㄷㅈ!**__ 바로 __⛅흐림__ 채널에 합류하세요! ✨ ")
     elif after.channel is voice_channel_3 and roles_ultra in member.roles: # ULTRA 역할 '흐림' 채널
-        await chat_channel.send(f"💎 방금, __⛅｜흐림__ 채널에 **{member.nick}** 님이 강림했어요! 💎")
+        await chat_channel.send(f"💎 방금, __⛅흐림__ 채널에 **{member.nick}** 님이 강림했어요! 💎")
     elif after.channel is voice_channel_3 and roles_super in member.roles: # SUPER 역할 '흐림' 채널
-        await chat_channel.send(f"**{member.nick}** 님이 __⛅｜흐림__ 채널에 나타났어요!")
+        await chat_channel.send(f"**{member.nick}** 님이 __⛅흐림__ 채널에 나타났어요!")
 
     elif after.channel is voice_channel_4 and roles_identity in member.roles: # 넘치는 존재감 역할 '번개' 채널
-        await chat_channel.send(f"**{member.nick}** 님이 __⚡｜번개__ 채널에 __**ㄷㄷㄷㅈ!**__")
+        await chat_channel.send(f"✨ 👑**{member.nick}** __**ㄷㄷㄷㅈ!**__ 바로 __⚡번개__ 채널에 합류하세요! ✨ ")
     elif after.channel is voice_channel_4 and roles_ultra in member.roles: # ULTRA 역할 '번개' 채널
-        await chat_channel.send(f"💎 방금, __⚡｜번개__ 채널에 **{member.nick}** 님이 강림했어요! 💎")
+        await chat_channel.send(f"💎 방금, __⚡번개__ 채널에 **{member.nick}** 님이 강림했어요! 💎")
     elif after.channel is voice_channel_4 and roles_super in member.roles: # SUPER 역할 '번개' 채널
-        await chat_channel.send(f"**{member.nick}** 님이 __⚡｜번개__ 채널에 나타났어요!")
+        await chat_channel.send(f"**{member.nick}** 님이 __⚡번개__ 채널에 나타났어요!")
     
 
 
