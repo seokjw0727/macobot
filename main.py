@@ -231,12 +231,48 @@ async def credit(interaction: discord.Interaction):
 
 
 
-@bot.event
-async def on_voice_state_update(member, before, after):
-    channel = bot.get_channel(1008066418127937586)
-    if after.channel is bot.get_channel(878881493806633010) and member.guild.get_role(878975480412381214) in member.roles:
-        await channel.send(f"{member.name} 님이 음성 채널에 접속하셨습니다.")
+@bot.event 
+async def on_voice_state_update(member, before, after): # SUPER, ULTRA 역할이 있는 유저가 음성 채널에 입장하면, 채팅 채널에 메시지를 보냄.
+    chat_channel = bot.get_channel(1008066418127937586) # 채팅 채널
 
+    voice_channel_1 = bot.get_channel(878881493806633010) # '비' 채널
+    voice_channel_2 = bot.get_channel(878881956111204373) # '맑음' 채널
+    voice_channel_3 = bot.get_channel(972503073224273981) # '흐림' 채널
+    voice_channel_4 = bot.get_channel(878882702835712021) # '번개' 채널
+
+    roles_super = member.guild.get_role(878975480412381214) # SUPER 역할
+    roles_ultra = member.guild.get_role(931000785477730365) # ULTRA 역할
+    roles_identity = member.guild.get_role(879589070718771250) # 넘치는 존재감 역할
+
+
+    if after.channel is voice_channel_1 and roles_super in member.roles: # SUPER 역할 '비' 채널
+        await chat_channel.send(f"{member.nick} 님이 __🌧｜비__ 채널에 등장했어요!")
+    elif after.channel is voice_channel_1 and roles_ultra in member.roles: # ULTRA 역할 '비' 채널
+        await chat_channel.send(f"{member.nick} 님이 __🌧｜비__ 채널에 등장했어요!")
+    elif after.channel is voice_channel_1 and roles_identity in member.roles: # 넘치는 존재감 역할 '비' 채널
+        await chat_channel.send(f"{member.nick} 님이 __🌧｜비__ 채널에 등장했어요!")
+
+    elif after.channel is voice_channel_2 and roles_super in member.roles: # SUPER 역할 '맑음' 채널
+        await chat_channel.send(f"{member.nick} 님이 __🌞｜맑음__ 채널에 등장했어요!")
+    elif after.channel is voice_channel_2 and roles_ultra in member.roles: # ULTRA 역할 '맑음' 채널
+        await chat_channel.send(f"{member.nick} 님이 __🌞｜맑음__ 채널에 등장했어요!")
+    elif after.channel is voice_channel_2 and roles_identity in member.roles: # 넘치는 존재감 역할 '맑음' 채널
+        await chat_channel.send(f"{member.nick} 님이 __🌞｜맑음__ 채널에 등장했어요!")
+
+    elif after.channel is voice_channel_3 and roles_super in member.roles: # SUPER 역할 '흐림' 채널
+        await chat_channel.send(f"{member.nick} 님이 __⛅｜흐림__ 채널에 등장했어요!")
+    elif after.channel is voice_channel_3 and roles_ultra in member.roles: # ULTRA 역할 '흐림' 채널
+        await chat_channel.send(f"{member.nick} 님이 __⛅｜흐림__ 채널에 등장했어요!")
+    elif after.channel is voice_channel_3 and roles_identity in member.roles: # 넘치는 존재감 역할 '흐림' 채널
+        await chat_channel.send(f"{member.nick} 님이 __⛅｜흐림__ 채널에 등장했어요!")
+
+    elif after.channel is voice_channel_4 and roles_super in member.roles: # SUPER 역할 '번개' 채널
+        await chat_channel.send(f"{member.nick} 님이 __⚡｜번개__ 채널에 등장했어요!")
+    elif after.channel is voice_channel_4 and roles_ultra in member.roles: # ULTRA 역할 '번개' 채널
+        await chat_channel.send(f"{member.nick} 님이 __⚡｜번개__ 채널에 등장했어요!")
+    elif after.channel is voice_channel_4 and roles_identity in member.roles: # 넘치는 존재감 역할 '번개' 채널
+        await chat_channel.send(f"{member.nick} 님이 __⚡｜번개__ 채널에 등장했어요!")
+    
 
 
             
