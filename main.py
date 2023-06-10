@@ -8,6 +8,7 @@ import datetime
 import pytz
 from mcstatus import JavaServer
 from webdriver import keep_alive
+
 intents = discord.Intents.default()
 intents.members = True
 intents.presences = True
@@ -131,7 +132,7 @@ async def ban(interaction: discord.Interaction, 유저: discord.Member, 사유: 
     
     for i in 유저.roles: # 차단 대상의 모든 역할을 박탈함.
         try:
-            await 유저.remove_roles(i)
+            await 유저.remove_roles(i)  
         except:
             channel = bot.get_channel(878886065321160745) # 처벌 채널 
             await 유저.add_roles(유저.guild.get_role(878966349701971999))
@@ -217,7 +218,8 @@ async def credit(interaction: discord.Interaction):
 
 
 @bot.event # '관종' 이벤트 || SUPER, ULTRA, 넘치는 존재감 역할이 있는 유저가 음성 채널에 접속하면, 채팅 채널에 접속하였음을 알림.
-async def on_voice_state_update(member, before, after): 
+async def on_voice_state_update(member, before, after):
+    
     
     # 채널
     chat_channel = bot.get_channel(1008066418127937586) # 채팅 채널
@@ -231,35 +233,35 @@ async def on_voice_state_update(member, before, after):
     roles_ultra = member.guild.get_role(931000785477730365) # ULTRA 역할
     roles_identity = member.guild.get_role(879589070718771250) # 넘치는 존재감 역할
 
+    if before == after: # 음성 채널에 접속한 경우임.
+        if after.channel is voice_channel_1 and roles_identity in member.roles: # '넘치는 존재감'이 '비' 채널에 접속한 경우임.
+            await chat_channel.send(f"✨ 👑**{member.nick}** __**ㄷㄷㄷㅈ!**__ 바로 __🌧비__ 채널에 합류하세요! ✨")
+        elif after.channel is voice_channel_1 and roles_ultra in member.roles: # 'ULTRA'가 '비' 채널에 접속한 경우임.
+            await chat_channel.send(f"💎방금, __🌧비__ 채널에 **{member.nick}** 님이 강림했어요! 💎")
+        elif after.channel is voice_channel_1 and roles_super in member.roles: # 'SUPER'가 '비' 채널에 접속한 경우임.
+            await chat_channel.send(f"**{member.nick}** 님이 __🌧비__ 채널에 나타났어요!")
 
-    if after.channel is voice_channel_1 and roles_identity in member.roles: # '넘치는 존재감'이 '비' 채널에 접속한 경우임.
-        await chat_channel.send(f"✨ 👑**{member.nick}** __**ㄷㄷㄷㅈ!**__ 바로 __🌧비__ 채널에 합류하세요! ✨")
-    elif after.channel is voice_channel_1 and roles_ultra in member.roles: # 'ULTRA'가 '비' 채널에 접속한 경우임.
-        await chat_channel.send(f"💎방금, __🌧비__ 채널에 **{member.nick}** 님이 강림했어요! 💎")
-    elif after.channel is voice_channel_1 and roles_super in member.roles: # 'SUPER'가 '비' 채널에 접속한 경우임.
-        await chat_channel.send(f"**{member.nick}** 님이 __🌧비__ 채널에 나타났어요!")
+        elif after.channel is voice_channel_2 and roles_identity in member.roles: # '넘치는 존재감'이 '맑음' 채널에 접속한 경우임.
+            await chat_channel.send(f"✨ 👑**{member.nick}** __**ㄷㄷㄷㅈ!**__ 바로 __🌞맑음__ 채널에 합류하세요! ✨ ")
+        elif after.channel is voice_channel_2 and roles_ultra in member.roles: # 'ULTRA'가 '맑음' 채널에 접속한 경우임.
+            await chat_channel.send(f"💎 방금, __🌞맑음__ 채널에 **{member.nick}** 님이 강림했어요! 💎")
+        elif after.channel is voice_channel_2 and roles_super in member.roles: # 'SUPER'가 '맑음' 채널에 접속한 경우임.
+            await chat_channel.send(f"**{member.nick}** 님이 __🌞맑음__ 채널에 나타났어요!")
 
-    elif after.channel is voice_channel_2 and roles_identity in member.roles: # '넘치는 존재감'이 '맑음' 채널에 접속한 경우임.
-        await chat_channel.send(f"✨ 👑**{member.nick}** __**ㄷㄷㄷㅈ!**__ 바로 __🌞맑음__ 채널에 합류하세요! ✨ ")
-    elif after.channel is voice_channel_2 and roles_ultra in member.roles: # 'ULTRA'가 '맑음' 채널에 접속한 경우임.
-        await chat_channel.send(f"💎 방금, __🌞맑음__ 채널에 **{member.nick}** 님이 강림했어요! 💎")
-    elif after.channel is voice_channel_2 and roles_super in member.roles: # 'SUPER'가 '맑음' 채널에 접속한 경우임.
-        await chat_channel.send(f"**{member.nick}** 님이 __🌞맑음__ 채널에 나타났어요!")
+        elif after.channel is voice_channel_3 and roles_identity in member.roles: # '넘치는 존재감'이 '흐림' 채널에 접속한 경우임.
+            await chat_channel.send(f"✨ 👑**{member.nick}** __**ㄷㄷㄷㅈ!**__ 바로 __⛅흐림__ 채널에 합류하세요! ✨ ")
+        elif after.channel is voice_channel_3 and roles_ultra in member.roles: # 'ULTRA'가 '흐림' 채널에 접속한 경우임.
+            await chat_channel.send(f"💎 방금, __⛅흐림__ 채널에 **{member.nick}** 님이 강림했어요! 💎")
+        elif after.channel is voice_channel_3 and roles_super in member.roles: # 'SUPER'가 '흐림' 채널에 접속한 경우임.
+            await chat_channel.send(f"**{member.nick}** 님이 __⛅흐림__ 채널에 나타났어요!")
 
-    elif after.channel is voice_channel_3 and roles_identity in member.roles: # '넘치는 존재감'이 '흐림' 채널에 접속한 경우임.
-        await chat_channel.send(f"✨ 👑**{member.nick}** __**ㄷㄷㄷㅈ!**__ 바로 __⛅흐림__ 채널에 합류하세요! ✨ ")
-    elif after.channel is voice_channel_3 and roles_ultra in member.roles: # 'ULTRA'가 '흐림' 채널에 접속한 경우임.
-        await chat_channel.send(f"💎 방금, __⛅흐림__ 채널에 **{member.nick}** 님이 강림했어요! 💎")
-    elif after.channel is voice_channel_3 and roles_super in member.roles: # 'SUPER'가 '흐림' 채널에 접속한 경우임.
-        await chat_channel.send(f"**{member.nick}** 님이 __⛅흐림__ 채널에 나타났어요!")
-
-    elif after.channel is voice_channel_4 and roles_identity in member.roles: # '넘치는 존재감'이 '번개' 채널에 접속한 경우임.
-        await chat_channel.send(f"✨ 👑**{member.nick}** __**ㄷㄷㄷㅈ!**__ 바로 __⚡번개__ 채널에 합류하세요! ✨ ")
-    elif after.channel is voice_channel_4 and roles_ultra in member.roles: # 'ULTRA'가 '번개' 채널에 접속한 경우임.
-        await chat_channel.send(f"💎 방금, __⚡번개__ 채널에 **{member.nick}** 님이 강림했어요! 💎")
-    elif after.channel is voice_channel_4 and roles_super in member.roles: # 'SUPER'가 '번개' 채널에 접속한 경우임.
-        await chat_channel.send(f"**{member.nick}** 님이 __⚡번개__ 채널에 나타났어요!")
-    
+        elif after.channel is voice_channel_4 and roles_identity in member.roles: # '넘치는 존재감'이 '번개' 채널에 접속한 경우임.
+            await chat_channel.send(f"✨ 👑**{member.nick}** __**ㄷㄷㄷㅈ!**__ 바로 __⚡번개__ 채널에 합류하세요! ✨ ")
+        elif after.channel is voice_channel_4 and roles_ultra in member.roles: # 'ULTRA'가 '번개' 채널에 접속한 경우임.
+            await chat_channel.send(f"💎 방금, __⚡번개__ 채널에 **{member.nick}** 님이 강림했어요! 💎")
+        elif after.channel is voice_channel_4 and roles_super in member.roles: # 'SUPER'가 '번개' 채널에 접속한 경우임.
+            await chat_channel.send(f"**{member.nick}** 님이 __⚡번개__ 채널에 나타났어요!")
+        
 
 
 @bot.tree.command(name= "마크", description="🛠️ 수리중 🛠️") # '마크' 명령어 || 수리중인 명령어를 임시로 막음.
