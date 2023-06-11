@@ -278,7 +278,7 @@ async def minecraft_server_check_test_version(interaction: discord.Interaction):
     server = JavaServer.lookup("124.60.247.163:25565")
     status = server.status()
 
-    if status.latency == None:
+    if status.latency is None:
         embed = discord.Embed(title='🔴오프라인🔴', description='서버가 오프라인이거나 오류가 발생했습니다.', color=0xff0000)
         await interaction.response.send_message(embed=embed)
     else:
@@ -291,9 +291,6 @@ async def minecraft_server_check_test_version(interaction: discord.Interaction):
 async def minecraft_server_check_test_version_error(interaction: discord.Interaction, error):
     if isinstance(error, commands.MissingPermissions):
         embed = discord.Embed(title='❌거부❌', description='당신은 관리자 권한이 없습니다.', color=0xff0000)
-        await interaction.response.send_message(embed=embed)
-    else:
-        embed = discord.Embed(title='⛔오류⛔', description='알 수 없는 오류가 발생했습니다.', color=0xff0000)
         await interaction.response.send_message(embed=embed)
 
 
