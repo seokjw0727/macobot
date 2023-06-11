@@ -273,28 +273,27 @@ async def minecraft_server_check(interaction: discord.Interaction):
 @bot.tree.command(name= "minecraft_server_check", description= "매코 서버의 상태를 확인합니다.") # 'minecraft_server_check' 명령어 || '마크' 명령어를 수리하기 위해 만든 임시 명령어.
 @commands.has_permissions(administrator=True)
 async def minecraft_server_check_test_version(interaction: discord.Interaction):
-    try:
-        logging_channel = bot.get_channel(1114564440092835990)
-        await logging_channel.send(f"{interaction.user} 님이 '/minecraft_server_check' 명령어를 사용했습니다.")
-        server = JavaServer.lookup("124.60.247.163:25565")
-        status = server.status()
+    logging_channel = bot.get_channel(1114564440092835990)
+    await logging_channel.send(f"{interaction.user} 님이 '/minecraft_server_check' 명령어를 사용했습니다.")
+    server = JavaServer.lookup("124.60.247.163:25565")
+    status = server.status()
 
+    if status.latency == None:
         embed = discord.Embed(title='🔴오프라인🔴', description='서버가 오프라인이거나 오류가 발생했습니다.', color=0xff0000)
         await interaction.response.send_message(embed=embed)
-
-    except status.latency > 0:
+    else:
         embed = discord.Embed(title='🟢온라인🟢', description='서버에 접속할 수 있습니다.', color=0x00ff00)
         embed.add_field(name='서버 상태', value=f'{status.latency}ms', inline=False)
         embed.add_field(name='현재 플레이어 수', value=f'{status.players.online}명', inline=False)
         await interaction.response.send_message(embed=embed)
-
+        
 @minecraft_server_check_test_version.error
 async def minecraft_server_check_test_version_error(interaction: discord.Interaction, error):
     if isinstance(error, commands.MissingPermissions):
         embed = discord.Embed(title='❌거부❌', description='당신은 관리자 권한이 없습니다.', color=0xff0000)
         await interaction.response.send_message(embed=embed)
     else:
-        embed = discord.Embed(title='🔴오프라인🔴', description='서버가 오프라인이거나 오류가 발생했습니다.', color=0xff0000)
+        embed = discord.Embed(title='⛔오류⛔', description='알 수 없는 오류가 발생했습니다.', color=0xff0000)
         await interaction.response.send_message(embed=embed)
 
 
