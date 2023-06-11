@@ -278,7 +278,7 @@ async def minecraft_server_check_test_version(interaction: discord.Interaction):
     server = JavaServer.lookup("macosv.kro.kr")
     status = server.status()
     embed = discord.Embed(title='🟢온라인🟢', description='마크 서버의 상태를 확인합니다.', color=0x00ff00)
-    embed.add_field(name='서버 상태', value=f'{status.ping}ms', inline=False)
+    embed.add_field(name='서버 상태', value=f'{status.latency}ms', inline=False)
     embed.add_field(name='현재 플레이어 수', value=f'{status.players.online}명', inline=False)
     await interaction.response.send_message(embed=embed)
 
